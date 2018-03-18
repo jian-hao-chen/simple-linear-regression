@@ -60,6 +60,8 @@ def main():
         subplot.scatter(x_data, y_data)
         plt.ion() # turn interactive mode on
         plt.show()
+        lines = [] # not neccesary, for hiding the warning message.
+        num = 0 # for determine the index of saving figure to file.
 
         for i in range(1000):
             # training model
@@ -73,12 +75,15 @@ def main():
                     pass
                 predict = output.eval(feed_dict = { x : x_data })
                 lines = subplot.plot(x_data, predict, 'r-', lw = 2)
-                plt.pause(0.1)
+                fig.savefig('result/result_%s' %num)
+                num = num + 1
+                #plt.pause(0.1) # To realtime show the result
     plt.ioff()
-    # turn interactive mode on, or the figure will be closed
-    # after the program
+    # turn interactive mode off, or the figure will be closed after
+    # the program
     plt.show()
     print("Compelete.")
+
     return
 
 if __name__ == '__main__':
